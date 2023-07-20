@@ -40,13 +40,14 @@ User.init(
       allowNull: false,
     },
     mobile: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
+   
   },
   {
     sequelize: db,
