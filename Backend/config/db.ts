@@ -13,9 +13,11 @@
 
 // export default connection;
 //}
+import * as dotenv from 'dotenv'
+dotenv.config()
 import {Sequelize} from "sequelize"
-const seq=new Sequelize("rent-a-time","liztdtctdbhodz544pj0","pscale_pw_1rphZm2ijMFxxzXsEaNXCIPkcyrW9j3OfQQx4Ng3gPb",{
-    host:"aws.connect.psdb.cloud",
+const seq=new Sequelize("rent-a-time",process.env.US,process.env.PAS ,{
+    host: process.env.HOST,
     dialect:"mysql",
     "dialectOptions": {
         "ssl": {
