@@ -1,0 +1,135 @@
+#cont{
+    height: 100vh;
+    width: 100%;
+     margin-top: 5%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .card {
+    width: 300px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 10px;
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+  
+  .album-images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  
+  .album-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Details Page Specific Styling */
+  :host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .details-card {
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .details-card .card {
+    margin: 0;
+  }
+  
+  .details-card .card h3 {
+    text-align: center;
+    color: #007BFF;
+  }
+  
+  .details-card .card-content {
+    text-align: center;
+  }
+  
+  .details-card .album-images {
+    justify-content: center;
+  }
+  
+  /* Host Details Card */
+  .host-card {
+    max-width: 400px;
+  }
+  
+  /* Available Slots Card */
+  .slots-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .slots-card .card {
+    flex-basis: calc(33.33% - 20px);
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+      grid-template-columns: repeat(1,1fr);
+      gap: 3%;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+    }
+  
+    .details-card {
+      max-width: 100%;
+    }
+  
+    .slots-card .card {
+      flex-basis: calc(50% - 20px);
+    }
+  }
+  
+  @media screen and (max-width: 576px) {
+    .card {
+      margin: 5px;
+    }
+  
+    .album-images {
+      justify-content: flex-start;
+    }
+  
+    .album-images img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .slots-card .card {
+      flex-basis: calc(100% - 10px);
+    }
+  }
+  

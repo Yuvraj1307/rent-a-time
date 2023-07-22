@@ -1,22 +1,5 @@
 import seq from "../config/db";
-// import sequelize from "sequelize"
-
-//method-1
-// interface users {
-//     name:string,
-//     email:string,
-//     mobile:number,
-//     password:string
-// }
-
-// const user = seq.define("users",{
-//     "name":sequelize.STRING,
-//     "email":sequelize.STRING,
-//     "mobile":sequelize.INTEGER,
-//     "password":sequelize.STRING,
-// })
-
-// export default user
+ 
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import db from '../config/db';
 

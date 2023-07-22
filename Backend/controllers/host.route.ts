@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import auth from "../middlewares/auth";
 import * as dotenv from "dotenv";
 import client from "../config/redis";
+import Property from "../models/property";
+import Slot from "../models/slot";
 // import { Property } from "../models/property";
 dotenv.config();
 
@@ -120,22 +122,87 @@ HostRouter.get("/logout", auth, async (req: Request, res: Response) => {
   res.send({ msg: "logout successful" });
 });
 
-//<<<<<<<<<<<<<<<<<----------------property creation-------------------->>>>>>>>>>>>>>>
+//<<<<<<<<<<<<<<<<<----------------property check-------------------->>>>>>>>>>>>>>>
 
-// HostRouter.post("/property", auth, async (req: Request, res: Response) => {
-//   //   let data=req.body
-//   let { name, address, price,album, type, availableroom, hostId } = req.body;
-//     try {
-//     //   let prop=  Property.build({ name, address, price, type, availableroom, hostId })
-//     let data=Property.build({ name, address,album, price, type, availableroom, hostId })
-//       await data.save()
-//       res.send(data)
+HostRouter.get("/property", async (req: Request, res: Response) => {
+  try {
+    Host.hasMany(Property, {
+      foreignKey: "hostId",
+    });
 
-//     } catch (error) {
-//       console.log(error.message);
-//             res.status(400).send({ msg: error.message });
-//     }
-// });
+    let data = await Host.findAll({
+      include: [Property],
+    });
+
+    res.status(200).send({ msg: "here is your data", data });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send({ msg: error.message });
+  }
+});
+
+
+
+//<<<<<<<<<<<<<<<<<<<<<----------------Open Slot------------------>>>>>>>>>>>>>>>>>>>>>
+
+HostRouter.post("/slot/:propId",auth,async(req:Request,res:Response)=>{
+let {userID}=req.body
+let propId=req.params.propId
+  try {
+    let slot = Slot.build({
+     propId,
+     hostId:userID
+    });
+    await slot.save();
+
+    res.status(201).send({msg:"Slot creation sucessful"})
+    
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send({ msg: error.message });
+    
+  }
+})
+HostRouter.get("/slot",auth,async(req:Request,res:Response)=>{
+  let {userID}=req.body
+  try {
+    let slots=await Slot.findAll({where:{hostId:userID}});
+    res.send({msg:"table is drouped",slots});
+  } catch (error) {
+    res.send("can't droup table");
+  }
+
+})
+
+HostRouter.delete("/dslot",async(req:Request,res:Response)=>{
+  try {
+    await Slot.drop();
+    res.send("table is drouped");
+  } catch (error) {
+    res.send("can't droup table");
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //<<<<<<<<<<<<<<<------------to delete something--------------->>>>>>>>>>>>>>>>>
 
@@ -185,15 +252,12 @@ HostRouter.delete("/delete/D", async (req: Request, res: Response) => {
   }
 });
 
-
-
-
 HostRouter.delete("/delete/P", async (req: Request, res: Response) => {
-    try {
-      await Host.drop();
-      res.send("table is drouped");
-    } catch (error) {
-      res.send("can't droup table");
-    }
-  });
- export default HostRouter;
+  try {
+    await Property.drop();
+    res.send("table is drouped");
+  } catch (error) {
+    res.send("can't droup table");
+  }
+});
+export default HostRouter;

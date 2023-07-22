@@ -4,9 +4,11 @@ import * as dotenv from 'dotenv'
 import UserRouter from "./controllers/user.route";
 import HostRouter from "./controllers/host.route";
 import propRouter from "./controllers/prop.route";
+import cors from "cors"
 dotenv.config()
 
 const app = express();
+app.use(cors({origin:"*"}))
 app.use(express.json())
 app.use("/user",UserRouter);
 app.use("/host",HostRouter);
