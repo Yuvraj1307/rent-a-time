@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetslotsService {
-  private backendUrl1 =`http://localhost:4500/host/prop/slots`
+  private backendUrl1 =`https://rentatime.onrender.com/host/prop/slots`
 
   constructor(private http: HttpClient) { }
   Slots(id: any): Observable<any> {
