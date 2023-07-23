@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http"
   providedIn: 'root'
 })
 export class PropertyDataService {
-url="http://localhost:4500/host/prop/property"
+url="https://rentatime.onrender.com/host/prop/property"
   constructor(private http:HttpClient) {
   }
   property(){
