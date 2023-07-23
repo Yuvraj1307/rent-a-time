@@ -17,20 +17,24 @@
     <div class="login-section">
         <div class="form-box login"  >
             <!-- Login form content here -->
-            <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form    (ngSubmit)="onSubmit()">
                 <h2>Sign In</h2>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-envelope'></i></span>
-                    <input type="email" formControlName="email" required>
+                    <input type="email"   [(ngModel)]="lgForm.email" name="email"  required>
                     <label >Email</label>
                 </div>
                 <div class="input-box">
                     <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
-                    <input type="password" formControlName="password" required>
+                    <input type="password"  [(ngModel)]="lgForm.password" name="password" required>
                     <label>Password</label>
                 </div>
                 <div class="remember-password">
-                    <label for=""><input type="checkbox" formControlName="rememberMe">Remember Me</label>
+                    <label for=""><input type="checkbox"  >Remember Me</label>
+                    <a href="#">Forget Password</a>
+                </div>
+                <div class="remember-password">
+                    <label for=""><input type="checkbox"   [(ngModel)]="lgForm.host" name="host">Are you a host?</label>
                     <a href="#">Forget Password</a>
                 </div>
                 <button class="btn">Login In</button>

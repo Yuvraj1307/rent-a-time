@@ -121,13 +121,13 @@ UserRouter.get("/slots",auth,async(req: Request, res: Response)=>{
 let {userID}=req.body
   try {
     // {where:{userId:userID}}
-    Slot.hasOne(Host, { foreignKey: 'hostId' });
-    Slot.hasOne(Property, { foreignKey: 'propId' });
+    // Slot.hasMany(Host, {localKey:, foreignKey: 'id' });
+    // Slot.hasOne(Property, { foreignKey: 'propId' });
 
 
     let slots=await Slot.findAll({
-      include:[Host,Property]
-    })
+      where:{userId:userID}
+     })
     res.status(200).send({msg:"here is your booing",slots})
   } catch (error) {
     console.log(error.message);

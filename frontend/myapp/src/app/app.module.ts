@@ -7,7 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { SlotdetailsComponent } from './slotdetails/slotdetails.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TcComponent } from './tc/tc.component';
-import { LoginRegisterComponent } from './login-register/login-register.component' 
+import { LoginRegisterComponent } from './login-register/login-register.component' ;
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms;
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,9 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
