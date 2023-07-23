@@ -8,8 +8,8 @@ export class LoginService {
 
  
 
-  private backendUrl1 =`http://localhost:4500/user/login`
-  private bacendUrl2=`http://localhost:4500/host/login`
+  private backendUrl1 =`https://rentatime.onrender.com/user/login`
+  private bacendUrl2=`https://rentatime.onrender.com/host/login`
   constructor(private http: HttpClient) {}
 
   Login(lgForm: any): Observable<any> {

@@ -90,7 +90,7 @@
             <p>Name: {{ item?.Host.name }}</p>
             <p>Email: {{ item?.Host.email }}</p>
             <p>Mobile: {{ item?.Host.mobile }}</p>
-            <button (click)="bookSlot(it)">{{it.isAvailable ? "Book Now" : "Cancel Booking"}}</button>
+            <button class="btn" (click)="bookSlot(it)">{{it.isAvailable ? "Book Now" : "Cancel Booking"}}</button>
             <!-- Additional slot details if available -->
           </div>
         </div>
