@@ -6,6 +6,9 @@ import bcrypt from "bcrypt";
 import auth from "../middlewares/auth";
 import * as dotenv from "dotenv";
 import client from "../config/redis";
+import Slot from "../models/slot";
+import Host from "../models/host";
+import Property from "../models/property";
 dotenv.config();
 
 const UserRouter = express.Router();
@@ -80,7 +83,7 @@ UserRouter.post("/login", async (req: Request, res: Response) => {
     bcrypt.compare(password, user.dataValues.password, function (err, result) {
       if (result) {
         var token = jwt.sign(
-          { email: user.dataValues.email },
+          {userID:user.dataValues.id, email: user.dataValues.email },
           process.env.secret_key,
           { expiresIn: "2h" }
         );
@@ -110,6 +113,43 @@ UserRouter.get("/logout", auth, async (req: Request, res: Response) => {
 });
 
 
+
+//<<<<<<<<<<<<<----------------get slots------------------------>>>>>>>>>>>>
+
+
+UserRouter.get("/slots",auth,async(req: Request, res: Response)=>{
+let {userID}=req.body
+  try {
+    // {where:{userId:userID}}
+    // Slot.hasMany(Host, {localKey:, foreignKey: 'id' });
+    // Slot.hasOne(Property, { foreignKey: 'propId' });
+
+
+    let slots=await Slot.findAll({
+      where:{userId:userID}
+     })
+    res.status(200).send({msg:"here is your booing",slots})
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ msg: error.message });
+  }
+})
+
+
+//<<<<<<<<<<<----------------book slots---------------->>>>>>>>>>>>
+
+
+UserRouter.patch("/slots/:slotId",auth,async(req: Request, res: Response)=>{
+  let {userID}=req.body
+  let slotId=req.params.slotId
+    try {
+      let slot=await Slot.update({userId:userID},{where:{id:slotId,userId:null,isAvailable:true}})
+      res.status(201).send({msg:"slot booked succesfully",slot})
+    } catch (error) {
+      console.log(error.message);
+      res.status(400).json({ msg: error.message });
+    }
+  })
 
 
 
